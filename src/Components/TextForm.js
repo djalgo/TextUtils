@@ -44,18 +44,18 @@ export default function TextForm(props) {
             
             <textarea className="form-control" id="myBox" onChange ={handleOnChange} value = {text} rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick = {handleUpClick}>Convert to UPPER case</button>
-        <button className="btn btn-primary mx-2" onClick = {handleClearClick}>Reset</button>
-        <button className="btn btn-primary mx-2" onClick = {handleCopyClick}>Copy To Clipboard</button>
-        <button className="btn btn-primary mx-2" onClick = {handleExtraSpaces}>Remove Extra Spaces</button>
+        <button disabled = {text.length === 0} className="btn btn-primary mx-2" onClick = {handleUpClick}>Convert to UPPER case</button>
+        <button disabled = {text.length === 0} className="btn btn-primary mx-2" onClick = {handleClearClick}>Reset</button>
+        <button disabled = {text.length === 0} className="btn btn-primary mx-2" onClick = {handleCopyClick}>Copy To Clipboard</button>
+        <button disabled = {text.length === 0} className="btn btn-primary mx-2" onClick = {handleExtraSpaces}>Remove Extra Spaces</button>
         <label htmlFor="lblcount" value ={count}>{count}</label>
         </div>
     <div className="container my-3">
         <h2>Your text summary</h2>
-        <p> {text.split(" ").length} Words, {text.length} Characters</p>
-        <p> { 0.008 * text.split(" ").length } Minutes read</p>
+        <p> {text.split(/\s+/).filter((e) => {return e.length !== 0}).length} Words, {text.length} Characters</p>
+        <p> { 0.008 * text.split(" ").filter((e) => {return e.length !== 0}).length } Minutes read</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length === 0 ? "Nothng to preview!" : text}</p>
     </div>
     </>
   )
